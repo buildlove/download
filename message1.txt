@@ -1,0 +1,7 @@
+url,path,name
+http://www.sina.com.cn,G:\learngit\python\download\download0.html,download.html
+http://www.sina.com.cn,G:\learngit\python\download\download1.html,download.html
+http://www.sina.com.cn,G:\learngit\python\download\download2.html,download.html
+http://www.sina.com.cn,G:\learngit\python\download\download3.html,download.html
+http://www.sina.com.cn,G:\learngit\python\download\download4.html,download.html
+
