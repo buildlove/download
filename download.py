@@ -13,9 +13,9 @@ def callbackfunc(blocknum, blocksize, totalsize):
     percent = 100.0 * blocknum * blocksize / totalsize
     if percent > 100:
         percent = 100
-    print "%.2f%%"% percent
+    print "%.2f%%" % percent
 
-#只存在url的txt文件
+#下载只存在url的txt文件
 def onlyUrl(filePath):
   opendir('test')
   filePath = localPath + filePath
@@ -26,9 +26,8 @@ def onlyUrl(filePath):
       local = localPath + '/test/index' + str(count) + '.html'
       urllib.urlretrieve(message, local, callbackfunc)
       count += 1
-      print u"下载只存在txt文件: " + message
+      print u"addPage: " + message
 
-#存在路径和url的txt文件
 def onlyAll(filePath):
   filePath = localPath + filePath
   messages1 = open(filePath).read().split('\n')
@@ -37,7 +36,7 @@ def onlyAll(filePath):
     if message:
       arr = message.split(',')
       urllib.urlretrieve(arr[0], arr[1], callbackfunc)
-      print u"下载存在路径txt文件：" + arr[0]
+      print u"下载存在路径url的txt文件：" + arr[0]
 
 # onlyAll('/message1.txt')
 onlyUrl('/message.txt')
