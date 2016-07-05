@@ -1,6 +1,6 @@
 ##download
 
-版本 v0.0.2
+版本 v0.0.3
 
 #### 简介
 
@@ -8,13 +8,17 @@
 
 #### 使用
 
-  * python download.py
-  * 在txt文件内必须按照指定格式存放链接(一行一条)。
+  * python download.py或点击exe文件->file->open选择txt文件
+  * 在txt文件内必须按照指定格式存放链接(一行一条，详见文件message.txt).
   * python环境为2.7(详见"download.py源代码")
 
 ----------------------------
 
 ## 版本历史
+
+#### v0.0.3
+
+  * 新增可执行程序exe文件
 
 #### v0.0.2
 
