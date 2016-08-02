@@ -3,8 +3,10 @@ import sys
 import urllib
 import os
 import re
+import time
 from PyQt4 import QtGui, QtCore
 localPath = os.getcwd()
+ISOTIMEFORMAT="%Y-%m-%d %X"   #设置时间格式
 
 class OpenFile(QtGui.QMainWindow):
     def __init__(self, parent=None):
@@ -43,10 +45,11 @@ class OpenFile(QtGui.QMainWindow):
         File.addAction(esc)
 
     # 下载进度条回调
-    def timerEvent(self, blocknum, blocksize, totalsize):
-        percent = 100.0 * blocknum * blocksize / totalsize
+    def callback(self, blocknum, blocksize, totalsize):
+        percent = abs(100.0 * blocknum * blocksize / totalsize)
         if percent > 100:
             percent = 100
+        print '%.2f%%' % percent
 
     def uniqList(self, ids):
         news_ids = []
@@ -59,22 +62,27 @@ class OpenFile(QtGui.QMainWindow):
     def readFile(self):
         if not os.path.isdir('test'):
             os.mkdir('test')
+        self.textEdit.append(u"正在下载....")
         filename = QtGui.QFileDialog.getOpenFileName(self, 'Open file', './') or ''
         File = open(filename, 'r')
         data = File.read()
         Urltxt = self.uniqList(data.split('\n'))
         count = 0
+        start_page = time.clock()
+        self.textEdit.clear()
+        Urltxt = filter(None,Urltxt)
         for message in Urltxt:
-          if message:
-            self.textEdit.append(message)
+            # self.textEdit.append(message) #加入textEdit组件，setText()是替换所有text
+            print '1'
             x,y = os.path.split(message)
             if y:
                 local = localPath + '/test/' + y
             else:
                 local = localPath + '/test/index' + str(count) + '.html'
-            urllib.urlretrieve(message, local, self.timerEvent)
+            urllib.urlretrieve(message, local, self.callback)
             count += 1
-        self.textEdit.append(u"共有任务数: "+str(count))
+        end_page = time.clock()
+        self.textEdit.append(u"共有任务数: %s, 用时: %f" % (str(count), (end_page - start_page)))
 
     # 移动主窗口到屏幕中心
     def center(self):
